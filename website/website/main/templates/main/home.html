@@ -1,0 +1,89 @@
+{% load static %}
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>3D Printer</title>
+        <meta name="description" content="3D Printer Livestream">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/c2282672d6.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+
+        <script src="{% static 'main/js/jquery.min.js' %}"></script>
+    </head>
+
+    <header>
+        <p>3D Printer Livestream</p>
+    </header>
+    {% if user.is_authenticated %}
+    <div class="pause">
+        <form action="" method="post" onsubmit="return confirm('Soll der Druck wirklich pausiert werden? (Fortsetzung über Remote nicht möglich)');">{% csrf_token %}<input type="hidden" name="pause-print" value="yes"><input type="image" width="50px" name="submit" src="{% static 'main/media/pause.svg' %}"></form>
+    </div>
+    {% endif %}
+    <body>
+        <div class="stream-wrap">
+            <div class="stream-slider">
+                <div class="stream"></div>
+            </div>
+
+            <div class="progress-wrap">
+                <div class="progress-bar">
+                    <div class="progress-stat"></div>
+                </div>
+                <div class="progress-percent">100%</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-1">
+                <div class="icon-1"><i class="fas fa-power-off"></i></div>
+                <div class="text-1">OFFLINE</div>
+            </div>
+
+            <div class="info-2">
+                <div class="icon-2"><i class="fas fa-monument fa-flip-vertical"></i></div>
+                <div class="text-2">- / - °C</div>
+            </div>
+
+            <div class="info-3">
+                <div class="icon-3"><i class="fas fa-border-none"></i></div>
+                <div class="text-3">- / - °C</div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <p>© {% now "Y" %} Kai Mortsiefer | {% if user.is_authenticated %}<a href="/admin/logout/?next=/">Logout</a>{% else %}<a href="/admin/login/?next=/">Login</a>{% endif %}</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            getPrinterStatus();
+            var intervalId = window.setInterval(function(){
+                getPrinterStatus();
+            }, 5000);
+        });
+
+        function getPrinterStatus() {
+            $.ajax({
+                url: "/api",
+                dataType: "json"
+            }).done(function(data) {
+                let status = data["printer"][0]["printer_status"];
+                let t0_temp = data["printer"][0]["temperature"]["t0"];
+                let bed_temp = data["printer"][0]["temperature"]["bed"];
+                let progress = data["printer"][0]["printer_progress"];
+
+                $(".text-1").text(status.toUpperCase());
+                $(".text-2").text(t0_temp["actual"] + " / " + t0_temp["set"] + " °C");
+                $(".text-3").text(bed_temp["actual"] + " / " + bed_temp["set"] + " °C");
+                $(".progress-percent").text(progress + " %");
+                $(".progress-stat").width(progress + "%");
+            });
+        }
+    </script>
+
+</html>

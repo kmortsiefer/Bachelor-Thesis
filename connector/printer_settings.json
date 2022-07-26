@@ -1,0 +1,15 @@
+{
+    "printer": [
+        {
+            "id": "rex2",
+            "name": "Bresser REX II",
+            "ip": "192.168.178.122",
+            "port": 8899,
+            "api_addr": "http://127.0.0.1/api/",
+            "api_key": "API_KEY",
+            "webhook_url": "",
+            "start_message": "",
+            "finish_message": ""
+        }
+    ]
+}

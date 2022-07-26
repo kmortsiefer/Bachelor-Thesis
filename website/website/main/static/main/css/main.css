@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    background:rgba(42, 42, 46, 1);
+    overflow-x: hidden;
+}
+
+a, a:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+header {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 18pt;
+    letter-spacing: 12px;
+}
+
+header ul {
+    width: 100%;
+    margin-top: 60px;
+    padding: 0;
+    text-align: center;
+    list-style: none;
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+
+header ul li {
+    position: relative;
+    margin: 0 30px 0 30px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+header ul li:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    width: 0px;
+    height: 2px;
+    background: rgb(235, 167, 41);
+    transition: all 0.45s;
+}
+
+.active-nav a {
+    color: rgb(235, 167, 41);
+}
+
+.active-nav:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: rgb(235, 167, 41);
+}
+
+header ul li:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+header ul li a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.stream-wrap
+{
+    position: relative;
+    max-width: 1000px;
+    height: 562px;
+    margin: 25px auto;
+    background-color: aqua;
+}
+
+.stream-slider {
+    position: relative;
+    max-width: 1000px;
+    height: 563px;
+
+    margin: 0 auto;
+    background-color: rgb(0, 0, 0);
+    overflow: hidden;
+}
+
+.stream {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+    background-image: url("https://3d-printer.ddns.net/stream");
+}
+
+.progress-wrap {
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 95%;
+    height: 10px;
+
+    border: 1px solid rgb(255, 255, 255, 0.6);
+    border-radius: 20px;
+
+    float: left;
+}
+
+.progress-stat {
+    width: 100%;
+    height: 6px;
+
+    margin: 2px 0 0 2px;
+
+    border-radius: 20px;
+    background-color: #2ecc71;
+}
+
+.progress-percent {
+    font-size: 10pt;
+    float: right;
+    margin-top: -2px;
+}
+
+.info-box
+{
+    max-width: 1000px;
+    height: 100px;
+    margin: 100px auto;
+    margin-bottom: 0px;
+}
+
+.info-1, .info-2, .info-3 {
+    width: 170px;
+    height: 100px;
+    margin-right: 240px;
+    float: left;
+}
+
+.info-3 {
+    margin-right: 0px;
+}
+
+.icon-1, .icon-2, .icon-3 {
+    margin-right: 30px;
+    font-size: 40pt;
+
+    opacity: 0.8;
+
+    float: left;
+}
+
+.text-1, .text-2, .text-3 {
+    line-height: 40pt;
+    vertical-align: middle;
+}
+
+.pause {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    right: 15px;
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.6);
+}
